@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Update Data</title>
+</head>
+<body>
+  <h1>Update Data</h1>
+
+  <!-- Add a button to open the update form -->
+  <button onclick="openForm()">Open Form</button>
+
+  <!-- Add a form for updating user data -->
+  <form id="updateForm" style="display: none;">
+    <label for="fname">Name:</label>
+    <input type="text" id="fname" name="fname"><br><br>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" readonly><br><br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password"><br><br>
+    <!-- Hidden input field to store the MongoDB ID -->
+    <input type="hidden" id="userId" name="userId">
+    <button type="button" onclick="updateData()">Update</button>
+  </form>
+
+  <script>
+    function updateData() {
+      let userId = document.getElementById('userId').value;
+      let name = document.getElementById('fname').value;
+      let password = document.getElementById('password').value;
+
+      let data = {
+        name: name,
+        password: password
+      };
+
+      if (confirm("Are you sure you want to update this user?")) {
+        const xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+
+        xhr.addEventListener("readystatechange", function () {
+          if (this.readyState === this.DONE) {
+            console.log(this.responseText);
+            // Handle the response after updating the user
+            // For example, you can display a success message
+            document.getElementById("message").innerHTML = "User updated successfully.";
+            // Refresh the user list
+            userlist();
+          }
+        });
+
+        xhr.open("PATCH", "http://localhost:3000/updateuser/" + userId);
+        xhr.setRequestHeader("Accept", "*/*");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(JSON.stringify(data));
+      }
+    }
+
+    // Open the update form and populate it with user data
+    function openUpdateForm(userId, name, email, password) {
+      document.getElementById('userId').value = userId;
+      document.getElementById('fname').value = name;
+      document.getElementById('email').value = email;
+      document.getElementById('password').value = password;
+      openForm();
+    }
+
+    // Show the update form
+    function openForm() {
+      document.getElementById("updateForm").style.display = "block";
+    }
+  </script>
+</body>
+</html>

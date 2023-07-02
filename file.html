@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<head>
+ <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/contact.css" rel="stylesheet">
+</head>
+
+<body>
+ 
+
+   <!-- Navbar & Hero Start -->
+
+        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+            <a href="" class="navbar-brand p-0">
+                <h1 class="text-primary m-0"><i class="fa fa-map-marker-alt me-3"></i>Heavenly home</h1>
+                <!-- <img src="img/logo.png" alt="Logo"> -->
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                    <a href="index.html" class="nav-item nav-link">Home</a>
+                    <a href="about.html" class="nav-item nav-link ">About</a>
+                    <a href="service.html" class="nav-item nav-link">Services</a>
+                   
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle " data-bs-toggle="dropdown">Login</a>
+                        <div class="dropdown-menu m-0">
+                            <a href="destination.html" class="dropdown-item">User</a>
+                            <a href="booking.html" class="dropdown-item">Admin</a>
+                            <a href="team.html" class="dropdown-item">Sponsor</a>
+                           
+                            
+                        </div>
+                    </div>
+                    <a href="contact.html" class="nav-item nav-link ">Contact</a>
+                </div>
+            </div>
+        </nav>
+                   
+                            
+            
+    <!-- Navbar & Hero End -->
+<head>
+    <title>ola age home</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <script>
+      function myFunction(){
+      event.preventDefault()
+      let data = {}
+      data.email = document.getElementById("email").value;
+      data.password = document.getElementById("psw").value;
+      data = JSON.stringify(data);
+      const xhr = new XMLHttpRequest();
+      xhr.withCredentials = true;
+      
+      xhr.addEventListener("readystatechange", function () {
+        if (this.readyState === this.DONE) {
+        const res = JSON.parse(this.responseText);
+          if(res.status == 200){
+         // return alert("You loggined");
+      window.location= "admin.html";
+        } else return alert("Invalid")
+        }
+      });
+      
+      xhr.open("POST", "http://localhost:3000/Login");
+      xhr.setRequestHeader("Accept", "*/*");
+      xhr.setRequestHeader("User-Agent", "Thunder Client (https://www.thunderclient.com)");
+      xhr.setRequestHeader("Content-Type", "application/json");
+      
+      xhr.send(data);
+      }
+      </script>
+
+<title>Login Form | CodingLab</title> 
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+  </head>
+  <body>
+    <div class="container">
+      <div class="wrapper">
+        <div class="title"><span>LOGIN</span></div>
+        <form action="#">
+          <div class="row">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="email" name="email" id="email" required>
+          </div>
+          <div class="row">
+            <i class="fas fa-lock"></i>
+            <input type="password" placeholder="Password" name="psw" id="psw" required>
+          </div>
+          <div class="pass"><a href="#">Forgot password?</a></div>
+          <div class="row button">
+            <button type="submit" class="btn" onclick="myFunction()">LOGIN
+          </div>
+          <div class="signup-link">Not a member? <a href="2.html">Signup now</a></div>
+        </form>
+      </div>
+            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</html>

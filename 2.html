@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+
+<head>
+ <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/contact.css" rel="stylesheet">
+</head>
+
+<body>
+ 
+
+   <!-- Navbar & Hero Start -->
+
+        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+            <a href="" class="navbar-brand p-0">
+                <h1 class="text-primary m-0"><i class="fa fa-map-marker-alt me-3"></i>Heavenly home</h1>
+                <!-- <img src="img/logo.png" alt="Logo"> -->
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                    <a href="index.html" class="nav-item nav-link">Home</a>
+                    <a href="about.html" class="nav-item nav-link ">About</a>
+                    <a href="service.html" class="nav-item nav-link">Services</a>
+                   
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle " data-bs-toggle="dropdown">Login</a>
+                        <div class="dropdown-menu m-0">
+                            <a href="destination.html" class="dropdown-item">User</a>
+                            <a href="booking.html" class="dropdown-item">Admin</a>
+                            <a href="team.html" class="dropdown-item">Sponsor</a>
+                           
+                            
+                        </div>
+                    </div>
+                    <a href="contact.html" class="nav-item nav-link ">Contact</a>
+                </div>
+                <a href="hii.html" class="btn btn-primary rounded-pill py-2 px-4">Donate</a>
+            </div>
+        </nav>
+                   
+                            
+            
+    <!-- Navbar & Hero End -->
+<head>
+<!-- Coding By CodingNepal - codingnepalweb.com -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=5.0">
+    <title> Registration or Sign Up form in HTML CSS | CodingLab </title> 
+    <link rel="stylesheet" href="stylehe.css">
+   </head>
+<body>
+  <div class="wrapper">
+    <h2>Registration</h2>
+    <form aname="registrationForm" onsubmit="return validateForm()">
+      <div class="input-box">
+        <input type="text" placeholder="Enter your name" name="name" id="name" required>
+      </div>
+      <div class="input-box">
+        <input type="text" placeholder="Enter your email" name="email" id="email" required>
+      </div>
+      <div class="input-box">
+        <input type="password" placeholder="Create password" name="psw" id="psw" required>
+      </div>
+      <div class="input-box">
+        <input type="password" placeholder="Confirm password" required>
+      </div>
+      <div class="policy">
+        <input type="checkbox">
+        <h3>I accept all terms & condition</h3>
+      </div>
+      <div class="input-box button"><center>
+        <button type="submit" onclick="Register()" class="registerbtn">Register</button>
+      </center>
+      </div>
+      <div class="text">
+        <h3>Already have an account? <a href="1.html">Login now</a></h3>
+      </div>
+    </form>
+  </div>
+  <script>
+    function Register(){
+    event.preventDefault()
+    let data = {}
+    data.fname = document.getElementById("name").value;
+    data.email = document.getElementById("email").value;
+    data.password = document.getElementById("psw").value;
+    data = JSON.stringify(data);
+    const xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+    
+    xhr.addEventListener("readystatechange", function () {
+      if (this.readyState === this.DONE) {
+        console.log(this.responseText);
+      }
+    });
+    
+    xhr.open("POST", "http://localhost:3000/signup");
+    
+    xhr.setRequestHeader("Accept", "*/*");
+    xhr.setRequestHeader("User-Agent", "Thunder Client (https://www.thunderclient.com)");
+    xhr.setRequestHeader("Content-Type", "application/json");
+    
+    xhr.send(data);
+    alert("User created");
+    
+    }
+    </script>
+     <script>
+
+function showSuccessMessage() {
+    var successMessage = document.getElementById("successMessage");
+    successMessage.style.display = "block";
+    // Display an alert message
+    //alert("Registration successful!");
+  }
+  </script>
+  
+  <script>
+    function validateForm() {
+      var fname = document.forms["registrationForm"]["name"].value;
+      var email = document.forms["registrationForm"]["email"].value;
+      var password = document.forms["registrationForm"]["psw"].value;
+      var errorBox = document.getElementById("errorBox");
+      errorBox.innerHTML = ""; // Clear previous error messages
+      
+      var isValid = true;
+      // Username validation
+      if (username.trim() === "") {
+        showError("name", "Username is required.");
+        isValid = false;
+      }
+      
+      
+      
+      // Email validation
+      if (!/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/.test(email)) {
+        showError("email", "Please enter a valid email address.");
+        isValid = false;
+      }
+      
+   
+      
+     
+      
+      // Address validation
+      if (address.trim() === "") {
+        showError("password", "password is required.");
+        isValid = false;
+      }
+      
+      return isValid;
+    }
+    
+    function showError(fieldId, errorMessage) {
+      var fieldContainer = document.getElementById(fieldId + "-container");
+      fieldContainer.classList.add("error");
+      
+      var errorContainer = document.getElementById(fieldId + "-error");
+      errorContainer.textContent = errorMessage;
+    }
+
+    function removeError(fieldId) {
+  var fieldContainer = document.getElementById(fieldId + "-container");
+  fieldContainer.classList.remove("error");
+  
+  var errorContainer = document.getElementById(fieldId + "-error");
+  errorContainer.textContent = "";
+}
+  </script>
+</body>
+</html>

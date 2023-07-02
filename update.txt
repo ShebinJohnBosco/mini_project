@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Update Data</title>
+  </head>
+  <body>
+    <h1>Update Data</h1>
+    <form>
+      <p>
+        <label for="name">Name:</label>
+        <input type="text" id="fname" name="name">
+      </p>
+      <p>
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email">
+      </p>
+      <p>
+        <label for="email">Phone:</label>
+        <input type="text" id="phone" name="phone">
+      </p>
+      <p>
+        <label for="email">password:</label>
+        <input type="text" id="password" name="password">
+      </p>
+      <button type="button" onclick="updateData()">Update Data</button>
+    </form>
+    <div id="message"></div>
+    <script>
+    function updateData() {
+      event.preventDefault()
+      let data = {}
+        data.id = '6492feeba2e00497dd38b1e4';
+        data.fname = document.getElementById('fname').value;
+        data.email = document.getElementById('email').value;
+        data.phone = document.getElementById('phone').value;
+        data.password = document.getElementById('password').value;
+        ata = JSON.stringify(data);
+        
+        const xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+
+xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === this.DONE) {
+    console.log(this.responseText);
+  }
+});   
+xhr.open("PUT", "http://localhost:3000/update");
+      xhr.setRequestHeader("Accept", "*/*");
+      xhr.setRequestHeader("User-Agent", "Thunder Client (https://www.thunderclient.com)");
+
+      xhr.send(data);
+      }
+    </script>
+  </body>
+</html>
+

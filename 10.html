@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .form-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            font-size: 14px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .submit-button {
+            padding: 10px 20px;
+            font-size: 14px;
+            background-color: #0F3057;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .submit-button:hover {
+            background-color: #0F3057;
+        }
+    </style>
+
+    <script>
+        function showSuccessMessage() {
+            var successMessage = document.getElementById("successMessage");
+            successMessage.style.display = "block";
+        }
+
+        function validateForm() {
+            var name = document.forms["registrationForm"]["name"].value;
+            var phone = document.forms["registrationForm"]["phone"].value;
+            var gname = document.forms["registrationForm"]["gname"].value;
+            var mc = document.forms["registrationForm"]["mc"].value;
+            var email = document.forms["registrationForm"]["email"].value;
+            var area = document.forms["registrationForm"]["area"].value;
+            var city = document.forms["registrationForm"]["city"].value;
+            var state = document.forms["registrationForm"]["state"].value;
+            var postcode = document.forms["registrationForm"]["postcode"].value;
+
+            var errorBox = document.getElementById("errorBox");
+            errorBox.innerHTML = ""; // Clear previous error messages
+
+            var isValid = true;
+
+            // Name validation
+            if (name.trim() === "") {
+                showError("name", "Name is required.");
+                isValid = false;
+            }
+
+            // Phone number validation
+            if (!/^\d{10}$/.test(phone)) {
+                showError("phone", "Phone number should be a 10-digit number.");
+                isValid = false;
+            }
+
+            // Guardian name validation
+            if (gname.trim() === "") {
+                showError("gname", "Guardian name is required.");
+                isValid = false;
+            }
+
+            // Medical condition validation
+            if (mc.trim() === "") {
+                showError("mc", "Medical condition is required.");
+                isValid = false;
+            }
+
+            // Email validation
+            if (!/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/.test(email)) {
+                showError("email", "Please enter a valid email address.");
+                isValid = false;
+            }
+
+            // Area validation
+            if (area.trim() === "") {
+                showError("area", "Area is required.");
+                isValid = false;
+            }
+
+            // City validation
+            if (city.trim() === "") {
+                showError("city", "City is required.");
+                isValid = false;
+            }
+
+            // State validation
+            if (state.trim() === "") {
+                showError("state", "State is required.");
+                isValid = false;
+            }
+
+            // Postal code validation
+            if (!/^\d{5}$/.test(postcode)) {
+                showError("postcode", "Postal code should be a 5-digit number.");
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        function showError(fieldId, errorMessage) {
+            var errorContainer = document.getElementById(fieldId + "-error");
+            errorContainer.innerHTML = errorMessage;
+        }
+
+        function Register(event) {
+            event.preventDefault();
+
+            if (validateForm()) {
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "http://localhost:4000/sign", true);
+                xhr.setRequestHeader("Content-Type", "application/json");
+
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        if (xhr.status === 200) {
+                            showSuccessMessage();
+                        } else {
+                            alert("Registration failed. Please try again later.");
+                        }
+                    }
+                };
+
+                var formData = {
+                    name: document.forms["registrationForm"]["name"].value,
+                    phone: document.forms["registrationForm"]["phone"].value,
+                    gname: document.forms["registrationForm"]["gname"].value,
+                    mc: document.forms["registrationForm"]["mc"].value,
+                    email: document.forms["registrationForm"]["email"].value,
+                    area: document.forms["registrationForm"]["area"].value,
+                    city: document.forms["registrationForm"]["city"].value,
+                    state: document.forms["registrationForm"]["state"].value,
+                    postcode: document.forms["registrationForm"]["postcode"].value
+                };
+
+                xhr.send(JSON.stringify(formData));
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Registration Form</h2>
+        <form name="registrationForm" onsubmit="Register(event)">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <div id="name-error" class="error-message"></div>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="text" id="phone" name="phone" required>
+                <div id="phone-error" class="error-message"></div>
+            </div>
+            <div class="form-group">
+                <label for="gname">Guardian Name:</label>
+                <input type="text" id="gname" name="gname" required>
+                <div id="gname-error" class="error-message"></div>
+            </div>
+            <div class="form-group">
+                <label for="mc">Medical Condition:</label>
+                <input type="text" id="mc" name="mc" required>
+                <div id="mc-error" class="error-message"></div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <div id="email-error" class="error-message"></div>
+            </div>
+            <div class="form-group">
+                <label for="area">Area:</label>
+                <input type="text" id="area" name="area" required>
+                <div id="area-error" class="error-message"></div>
+            </div>
+            <div class="form-group">
+                <label for="city">City:</label>
+                <input type="text" id="city" name="city" required>
+                <div id="city-error" class="error-message"></div>
+            </div>
+            <div class="form-group">
+                <label for="state">State:</label>
+                <input type="text" id="state" name="state" required>
+                <div id="state-error" class="error-message"></div>
+            </div>
+            <div class="form-group">
+                <label for="postcode">Postal Code:</label>
+                <input type="text" id="postcode" name="postcode" required>
+                <div id="postcode-error" class="error-message"></div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Register" class="submit-button">
+            </div>
+        </form>
+        <div id="errorBox" class="error-message"></div>
+        <div id="successMessage" style="display: none;">Registration successful!</div>
+    </div>
+</body>
+</html>

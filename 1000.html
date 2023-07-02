@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+<!DOCTYPE html>
+
+<head>
+ <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/contact.css" rel="stylesheet">
+</head>
+
+<body>
+ 
+
+   <!-- Navbar & Hero Start -->
+
+        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+            <a href="" class="navbar-brand p-0">
+                <h1 class="text-primary m-0"><i class="fa fa-map-marker-alt me-3"></i>Heavenly home</h1>
+                <!-- <img src="img/logo.png" alt="Logo"> -->
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                    <a href="index.html" class="nav-item nav-link">Home</a>
+                    <a href="about.html" class="nav-item nav-link ">About</a>
+                    <a href="service.html" class="nav-item nav-link">Services</a>
+                   
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle " data-bs-toggle="dropdown">Login</a>
+                        <div class="dropdown-menu m-0">
+                            <a href="destination.html" class="dropdown-item">User</a>
+                            <a href="booking.html" class="dropdown-item">Admin</a>
+                            <a href="team.html" class="dropdown-item">Sponsor</a>
+                           
+                            
+                        </div>
+                    </div>
+                    <a href="contact.html" class="nav-item nav-link ">Contact</a>
+                </div>
+                <a href="hii.html" class="btn btn-primary rounded-pill py-2 px-4">Donate</a>
+            </div>
+        </nav>
+                   
+                            
+            
+    <!-- Navbar & Hero End -->
+<head>
+<!-- Coding By CodingNepal - codingnepalweb.com -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=5.0">
+    <title> Registration or Sign Up form in HTML CSS | CodingLab </title> 
+    <link rel="stylesheet" href="stylehe.css">
+
+<style>
+    .error-message {
+      color: red;
+      font-size: 12px;
+      margin-top: 5px;
+  }
+</style>
+
+
+
+<script>
+    function validateForm() {
+        var name = document.forms["registrationForm"]["name"].value;
+        var email = document.forms["registrationForm"]["email"].value;
+        var password = document.forms["registrationForm"]["password"].value;
+        var confirmPassword = document.forms["registrationForm"]["confirmPassword"].value;
+
+        var errorBox = document.getElementById("errorBox");
+        errorBox.innerHTML = ""; // Clear previous error messages
+
+        var isValid = true;
+
+        // Name validation
+        if (name.trim() === "") {
+            showError("name", "Name is required.");
+            isValid = false;
+        }
+
+        // Email validation
+        if (!/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/.test(email)) {
+            showError("email", "Please enter a valid email address.");
+            isValid = false;
+        }
+
+        // Password validation
+        if (password === "") {
+            showError("password", "Password is required.");
+            isValid = false;
+        }
+
+        // Confirm Password validation
+        if (confirmPassword === "") {
+            showError("confirmPassword", "Please confirm your password.");
+            isValid = false;
+        }
+
+        if (password !== confirmPassword) {
+            showError("confirmPassword", "Passwords do not match.");
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+    function showError(fieldId, errorMessage) {
+        var errorContainer = document.getElementById(fieldId + "-error");
+        errorContainer.textContent = errorMessage;
+    }
+
+    function register() {
+        event.preventDefault();
+
+        if (validateForm()) {
+            // Get form values
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+
+            // Create an object with form data
+            var data = {
+                name: name,
+                email: email,
+                password: password
+            };
+
+            // Send form data to the server (replace the URL with your actual endpoint)
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "http://localhost:4000/sign");
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.send(JSON.stringify(data));
+
+            // Display success message
+            var successMessage = document.getElementById("successMessage");
+            successMessage.style.display = "block";
+        }
+    }
+</script>
+   </head>
+
+<body>
+
+    <div class="wrapper">
+        <h2>Registration</h2>
+  <div class="form-container">
+    <form name="registrationForm" onsubmit="register()">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <div id="name-error" class="error-message"></div>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <div id="email-error" class="error-message"></div>
+        </div>
+        <div class="form-group">
+            <label for="password">Create Password:</label>
+            <input type="password" id="password" name="password" required>
+            <div id="password-error" class="error-message"></div>
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
+            <div id="confirmPassword-error" class="error-message"></div>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Register" class="submit-button">
+        </div>
+    <div id="errorBox" class="error-message"></div>
+    <div id="successMessage" style="display: none;">Registration successful!</div>
+  </div>
+
+      <div class="policy">
+        <input type="checkbox">
+        <h3>I accept all terms & condition</h3>
+      </div>
+      </div>
+      <div class="text">
+        <h3>Already have an account? <a href="1.html">Login now</a></h3>
+      </div>
+    </form>
+  </div>
+  
+
+
+</body>
+</html>
